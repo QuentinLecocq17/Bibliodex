@@ -3,6 +3,6 @@
     <string name="app_name">Bibliodex</string>
     <string name="welcomeTitle">Bienvenue</string>
     <string name="btnAddBook">Ajouter livre</string>
-    <string name="btnSeeShelf">Voir votre bibliothèque</string>
+    <string name="btnSeeShelf">Ma bibliothèque</string>
     <string name="currentlyReading">Livre en cours</string>
 </resources>
