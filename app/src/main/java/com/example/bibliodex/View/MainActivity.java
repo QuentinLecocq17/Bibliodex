@@ -1,6 +1,7 @@
 package com.example.bibliodex.View;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -8,15 +9,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bibliodex.Adapter.BookAdapter;
+import com.example.bibliodex.Model.Book;
 import com.example.bibliodex.R;
+import com.example.bibliodex.ViewModel.BookVM;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView listCurrentBooks;
     private Button btnAddBook;
     private Button btnSeeShelf;
+    private BookVM bookVM;
+    private ArrayList<Book> bookList;
+    private BookAdapter bookAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +39,27 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         this.listCurrentBooks = findViewById(R.id.listCurrent);
+        listCurrentBooks.setLayoutManager(new LinearLayoutManager(this));
         this.btnAddBook = findViewById(R.id.btnAddBook);
         this.btnSeeShelf = findViewById(R.id.btnSeeShelf);
+        this.bookVM = new BookVM(this);
+        this.bookList = bookVM.getAllBooks();
+        this.bookAdapter = new BookAdapter(this, bookList);
+        this.listCurrentBooks.setAdapter(bookAdapter);
+        this.btnAddBook.setOnClickListener(v -> {
+            // Logic to add a new book
+            Book newBook = new Book();
+            newBook.setTitle("New Book");
+            newBook.setAuthor("Author Name");
+            newBook.setPublicationYear(2023);
+            newBook.setRating(5);
+            newBook.setRead(true);
+            bookVM.setBook(newBook);
+            bookVM.addBook();
+            this.bookList.clear();
+            this.bookList.addAll(bookVM.getAllBooks());
+            this.bookAdapter.notifyDataSetChanged();
+            bookAdapter.notifyDataSetChanged();
+        });
     }
 }
