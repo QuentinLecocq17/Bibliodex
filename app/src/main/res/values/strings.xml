@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Bibliodex</string>
+    <string name="welcomeTitle">Welcome</string>
+    <string name="btnAddBook">Add Book</string>
+    <string name="btnSeeShelf">My Bookshelf</string>
+    <string name="currentlyReading">Currently reading</string>
 </resources>

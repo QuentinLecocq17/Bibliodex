@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bibliodex</string>
+    <string name="welcomeTitle">Bienvenue</string>
+    <string name="btnAddBook">Ajouter livre</string>
+    <string name="btnSeeShelf">Ma bibliothèque</string>
+    <string name="currentlyReading">Livre en cours</string>
+</resources>
