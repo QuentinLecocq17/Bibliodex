@@ -4,4 +4,5 @@
     <string name="welcomeTitle">Bienvenue</string>
     <string name="btnAddBook">Ajouter livre</string>
     <string name="btnSeeShelf">Voir votre bibliothèque</string>
+    <string name="currentlyReading">Livre en cours</string>
 </resources>
