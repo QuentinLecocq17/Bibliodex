@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         this.bookAdapter = new BookAdapter(this, bookList);
         this.listCurrentBooks.setAdapter(bookAdapter);
         this.btnAddBook.setOnClickListener(this::displayAddBookWindow);
+        this.btnSeeShelf.setOnClickListener(this::displayListBookWindow);
     }
 
     /**
@@ -60,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
      */
     private void displayAddBookWindow(View view) {
         Intent intent = new Intent(this, AddBookWindow.class);
+        startActivity(intent);
+    }
+
+    private void displayListBookWindow(View view) {
+        Intent intent = new Intent(this, ListBookWindow.class);
         startActivity(intent);
     }
 

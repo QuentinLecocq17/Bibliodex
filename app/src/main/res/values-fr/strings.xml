@@ -18,4 +18,10 @@
     <string name="read">Lu</string>
     <string name="page">Page</string>
     <string name="inProgress">En Cours</string>
+    <string name="displayAll">Tous les livres</string>
+    <string name="displayFav">Favoris</string>
+    <string name="displayRead">Livre lu</string>
+    <string name="displayProgress">Livre en cours</string>
+    <string name="searchBooks">Rechercher un livre</string>
+    <string name="btnBack">Retour</string>
 </resources>
