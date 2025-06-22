@@ -58,11 +58,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.textRating.setText(book.getRating() + "/5");
 
         if (book.isRead()) {
-            holder.textStatus.setText("Lu");
+            holder.textStatus.setText(context.getString(R.string.read));
             holder.textPage.setText(""); // pas besoin d'afficher la page
         } else {
-            holder.textStatus.setText("En cours");
-            holder.textPage.setText("Page " + book.getPageActual());
+            holder.textStatus.setText(context.getString(R.string.inProgress));;
+            holder.textPage.setText(context.getString(R.string.page) + " " + book.getPageActual());
         }
 
         // Charger la couverture depuis une URI avec Glide

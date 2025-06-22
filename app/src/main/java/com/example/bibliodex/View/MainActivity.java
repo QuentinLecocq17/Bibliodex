@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private BookVM bookVM;
     private ArrayList<Book> bookList;
     private BookAdapter bookAdapter;
-    private String uriCover;
-    private ActivityResultLauncher<Intent> pickImageLauncher;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,22 +51,7 @@ public class MainActivity extends AppCompatActivity {
         this.bookList = bookVM.getAllBooks();
         this.bookAdapter = new BookAdapter(this, bookList);
         this.listCurrentBooks.setAdapter(bookAdapter);
-        this.uriCover = "android.resource://com.example.bibliodex/drawable/default_book";
         this.btnAddBook.setOnClickListener(this::displayAddBookWindow);
-        pickImageLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        Uri selectedImageUri = result.getData().getData();
-                        this.uriCover = selectedImageUri.toString();
-                    }
-                }
-        );
-        this.btnSeeShelf.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            pickImageLauncher.launch(intent);
-        });
     }
 
     private void displayAddBookWindow(View view) {

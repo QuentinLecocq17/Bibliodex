@@ -79,6 +79,8 @@ public class BookVM implements Serializable {
     public void setPageActual(int pageActual) {
         book.setPageActual(pageActual);
     }
+    public String getCoverUri(){return book.getCoverUri();}
+    public void setCoverUri(String uri){book.setCoverUri(uri);}
 
 
     /**

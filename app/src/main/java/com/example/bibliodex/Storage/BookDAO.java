@@ -19,7 +19,7 @@ public class BookDAO extends BaseDAO {
      */
     public BookDAO(Context context) {
         super(context);
-        this.listBooks = new ArrayList<>();
+        this.listBooks = this.getAllBooks();
     }
 
     public ArrayList<Book> getAllBooks() {
