@@ -81,12 +81,17 @@ public class AddBookWindow extends AppCompatActivity {
         btnValidate.setOnClickListener(this::validateAddBook);
     }
 
+    /**
+     * Validates the input fields and adds a new book.
+     * @param view the view that triggered this method
+     */
     private void validateAddBook(View view) {
         BookVM bookVM = new BookVM(this);
         bookVM.setTitle(inputTitle.getText().toString());
         bookVM.setAuthor(inputAuthor.getText().toString());
         bookVM.setPublicationYear(Integer.parseInt(inputYear.getText().toString()));
         bookVM.setRating((int) ratingBar.getRating());
+        bookVM.setFavorite(checkFav.isChecked());
         bookVM.setRead(checkRead.isChecked());
         bookVM.setPageActual(checkRead.isChecked() ? 0 : Integer.parseInt(inputPage.getText().toString()));
         bookVM.setCoverUri(coverUri != null ? coverUri : "android.resource://com.example.bibliodex/drawable/default_book");
@@ -94,12 +99,20 @@ public class AddBookWindow extends AppCompatActivity {
         displayMainPage(view);
     }
 
+    /**
+     * Changes the cover image of the book.
+     * @param view the view that triggered this method
+     */
     private void changeCover(View view){
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         pickImageLauncher.launch(intent);
     }
 
+    /**
+     * Displays the main page of the application.
+     * @param view the view that triggered this method
+     */
     private void displayMainPage(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

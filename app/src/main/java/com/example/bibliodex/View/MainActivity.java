@@ -54,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
         this.btnAddBook.setOnClickListener(this::displayAddBookWindow);
     }
 
+    /**
+     * Displays the Add Book window when the "Add Book" button is clicked.
+     * @param view the view that was clicked
+     */
     private void displayAddBookWindow(View view) {
         Intent intent = new Intent(this, AddBookWindow.class);
         startActivity(intent);
