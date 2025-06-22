@@ -5,4 +5,17 @@
     <string name="btnAddBook">Ajouter livre</string>
     <string name="btnSeeShelf">Ma bibliothèque</string>
     <string name="currentlyReading">Livre en cours</string>
+    <string name="coverLabel">Couverture</string>
+    <string name="btnChangeCover">Changer couverture</string>
+    <string name="titleBook">Titre</string>
+    <string name="authorBook">Auteur</string>
+    <string name="yearBook">Année publication</string>
+    <string name="isFav">Favoris</string>
+    <string name="isRead">Est lu</string>
+    <string name="currentPage">Page actuelle</string>
+    <string name="validate">Valider</string>
+    <string name="cancel">Annuler</string>
+    <string name="read">Lu</string>
+    <string name="page">Page</string>
+    <string name="inProgress">En Cours</string>
 </resources>

@@ -13,7 +13,12 @@
         android:theme="@style/Theme.Bibliodex"
         tools:targetApi="31">
         <activity
+            android:name=".View.AddBookWindow"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
             android:name=".View.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
