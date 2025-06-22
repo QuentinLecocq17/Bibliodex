@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bordeau">#730321</color>
     <color name="bordeau_clair">#9C3F5A</color>
+    <color name="jaune_rating">#FFD600</color>
+    <color name="gray">#FF888888</color>
 </resources>

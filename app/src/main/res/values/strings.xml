@@ -4,4 +4,14 @@
     <string name="btnAddBook">Add Book</string>
     <string name="btnSeeShelf">My Bookshelf</string>
     <string name="currentlyReading">Currently reading</string>
+    <string name="coverLabel">Cover</string>
+    <string name="btnChangeCover">Change Cover</string>
+    <string name="titleBook">Title</string>
+    <string name="authorBook">Author</string>
+    <string name="yearBook">Publication Year</string>
+    <string name="isFav">Favorite</string>
+    <string name="isRead">Is Read</string>
+    <string name="currentPage">Current Page</string>
+    <string name="validate">Validate</string>
+    <string name="cancel">Cancel</string>
 </resources>

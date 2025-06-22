@@ -1,10 +1,15 @@
 package com.example.bibliodex.View;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -27,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private BookVM bookVM;
     private ArrayList<Book> bookList;
     private BookAdapter bookAdapter;
+    private String uriCover;
+    private ActivityResultLauncher<Intent> pickImageLauncher;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,20 +54,27 @@ public class MainActivity extends AppCompatActivity {
         this.bookList = bookVM.getAllBooks();
         this.bookAdapter = new BookAdapter(this, bookList);
         this.listCurrentBooks.setAdapter(bookAdapter);
-        this.btnAddBook.setOnClickListener(v -> {
-            // Logic to add a new book
-            Book newBook = new Book();
-            newBook.setTitle("New Book");
-            newBook.setAuthor("Author Name");
-            newBook.setPublicationYear(2023);
-            newBook.setRating(5);
-            newBook.setRead(true);
-            bookVM.setBook(newBook);
-            bookVM.addBook();
-            this.bookList.clear();
-            this.bookList.addAll(bookVM.getAllBooks());
-            this.bookAdapter.notifyDataSetChanged();
-            bookAdapter.notifyDataSetChanged();
+        this.uriCover = "android.resource://com.example.bibliodex/drawable/default_book";
+        this.btnAddBook.setOnClickListener(this::displayAddBookWindow);
+        pickImageLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Uri selectedImageUri = result.getData().getData();
+                        this.uriCover = selectedImageUri.toString();
+                    }
+                }
+        );
+        this.btnSeeShelf.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            pickImageLauncher.launch(intent);
         });
     }
+
+    private void displayAddBookWindow(View view) {
+        Intent intent = new Intent(this, AddBookWindow.class);
+        startActivity(intent);
+    }
+
 }
