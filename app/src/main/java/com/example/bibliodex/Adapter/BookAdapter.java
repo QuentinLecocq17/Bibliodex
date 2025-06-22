@@ -105,6 +105,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
     /**
+     * Updates the book list and notifies the adapter of the change.
+     * @param newBookList the new list of books
+     */
+    public void updateBookList(ArrayList<Book> newBookList) {
+        this.bookList = newBookList;
+        notifyDataSetChanged();
+    }
+
+    /**
      * Returns the number of items in the list.
      * @return the size of the book list
      */

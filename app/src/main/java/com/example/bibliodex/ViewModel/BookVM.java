@@ -227,4 +227,10 @@ public class BookVM implements Serializable {
         return bookDAO.getAllInProgress();
     }
 
+    /**
+     * Gets all books read from the Data Access Object.
+     * @return an array of all books in progress
+     */
+    public ArrayList<Book> getAllReadBooks() {return bookDAO.getAllRead();}
+
 }
