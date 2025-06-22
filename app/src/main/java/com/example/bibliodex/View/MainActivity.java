@@ -1,15 +1,12 @@
 package com.example.bibliodex.View;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -17,9 +14,10 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bibliodex.Adapter.BookAdapter;
+import com.example.bibliodex.RecyclerViewManagment.BookAdapter;
 import com.example.bibliodex.Model.Book;
 import com.example.bibliodex.R;
+import com.example.bibliodex.RecyclerViewManagment.MarginItemDecoration;
 import com.example.bibliodex.ViewModel.BookVM;
 
 import java.util.ArrayList;
@@ -48,11 +46,14 @@ public class MainActivity extends AppCompatActivity {
         this.btnAddBook = findViewById(R.id.btnAddBook);
         this.btnSeeShelf = findViewById(R.id.btnSeeShelf);
         this.bookVM = new BookVM(this);
-        this.bookList = bookVM.getAllBooks();
+        this.bookList = bookVM.getAllUnreadBooks();
         this.bookAdapter = new BookAdapter(this, bookList);
         this.listCurrentBooks.setAdapter(bookAdapter);
         this.btnAddBook.setOnClickListener(this::displayAddBookWindow);
         this.btnSeeShelf.setOnClickListener(this::displayListBookWindow);
+        int marginInPx = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
+        listCurrentBooks.addItemDecoration(new MarginItemDecoration(marginInPx));
     }
 
     /**

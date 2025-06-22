@@ -1,4 +1,4 @@
-package com.example.bibliodex.Adapter;
+package com.example.bibliodex.RecyclerViewManagment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -99,13 +100,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
      */
     public static class BookViewHolder extends RecyclerView.ViewHolder {
         ImageView imageCover;
-        TextView textTitle, textAuthorYear, textStatus, textPage, textRating;
+        TextView textTitle, textAuthorYear, textStatus, textPage;
+        RatingBar ratingBar;
 
-        /**
-         * Constructs a new BookViewHolder and initializes view references.
-         *
-         * @param itemView The view representing a single book item.
-         */
         public BookViewHolder(View itemView) {
             super(itemView);
             imageCover = itemView.findViewById(R.id.imageCover);
@@ -113,7 +110,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             textAuthorYear = itemView.findViewById(R.id.textAuthorYear);
             textStatus = itemView.findViewById(R.id.textStatus);
             textPage = itemView.findViewById(R.id.textPage);
-            textRating = itemView.findViewById(R.id.textRating);
+            ratingBar = itemView.findViewById(R.id.ratingBar); // Remplace textRating
         }
     }
 
@@ -141,7 +138,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Book book = bookList.get(position);
         holder.textTitle.setText(book.getTitle());
         holder.textAuthorYear.setText(book.getAuthor() + " - " + book.getPublicationYear());
-        holder.textRating.setText(book.getRating() + "/5");
+        holder.ratingBar.setRating(book.getRating()); // Utilise le RatingBar
 
         if (book.isRead()) {
             holder.textStatus.setText(context.getString(R.string.read));

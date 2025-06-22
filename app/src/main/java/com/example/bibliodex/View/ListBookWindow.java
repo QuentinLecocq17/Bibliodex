@@ -2,6 +2,7 @@ package com.example.bibliodex.View;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
@@ -14,9 +15,10 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bibliodex.Adapter.BookAdapter;
+import com.example.bibliodex.RecyclerViewManagment.BookAdapter;
 import com.example.bibliodex.Model.Book;
 import com.example.bibliodex.R;
+import com.example.bibliodex.RecyclerViewManagment.MarginItemDecoration;
 import com.example.bibliodex.ViewModel.BookVM;
 
 import java.util.ArrayList;
@@ -62,6 +64,9 @@ public class ListBookWindow extends AppCompatActivity {
         this.btnDisplayRead.setOnClickListener(this::displayRead);
         this.btnDisplayUnread.setOnClickListener(this::displayUnread);
         this.btnBack.setOnClickListener(this::displayMainActivity);
+        int marginInPx = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
+        recyclerView.addItemDecoration(new MarginItemDecoration(marginInPx));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
