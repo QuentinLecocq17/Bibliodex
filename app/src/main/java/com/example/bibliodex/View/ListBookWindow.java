@@ -62,6 +62,20 @@ public class ListBookWindow extends AppCompatActivity {
         this.btnDisplayRead.setOnClickListener(this::displayRead);
         this.btnDisplayUnread.setOnClickListener(this::displayUnread);
         this.btnBack.setOnClickListener(this::displayMainActivity);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
     private void displayAll(View view) {
