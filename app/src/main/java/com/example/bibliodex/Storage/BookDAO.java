@@ -116,6 +116,20 @@ public class BookDAO extends BaseDAO {
     }
 
     /**
+     * Retrieves all books that are marked as read.
+     * @return ArrayList of read Book objects
+     */
+    public ArrayList<Book> getAllRead() {
+        ArrayList<Book> readBooks = new ArrayList<>();
+        for (Book book : listBooks) {
+            if (book.isRead()) {
+                readBooks.add(book);
+            }
+        }
+        return readBooks;
+    }
+
+    /**
      * Saves the current list of books to SharedPreferences as a JSON string.
      */
     public void saveBooks() {

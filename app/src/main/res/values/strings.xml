@@ -17,4 +17,10 @@
     <string name="read">Read</string>
     <string name="page">Page</string>
     <string name="inProgress">In Progress</string>
+    <string name="displayAll">All Books</string>
+    <string name="displayFav">Favorites</string>
+    <string name="displayRead">Book Read</string>
+    <string name="displayProgress">Books in progress</string>
+    <string name="searchBooks">Search Book</string>
+    <string name="btnBack">Back</string>
 </resources>
