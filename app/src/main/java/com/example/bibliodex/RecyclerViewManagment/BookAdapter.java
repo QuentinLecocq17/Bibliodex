@@ -1,6 +1,7 @@
 package com.example.bibliodex.RecyclerViewManagment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.bibliodex.Model.Book;
 import com.example.bibliodex.R;
+import com.example.bibliodex.View.AddBookWindow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +104,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         ImageView imageCover;
         TextView textTitle, textAuthorYear, textStatus, textPage;
         RatingBar ratingBar;
+        View clickZone;
 
         public BookViewHolder(View itemView) {
             super(itemView);
@@ -110,7 +113,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             textAuthorYear = itemView.findViewById(R.id.textAuthorYear);
             textStatus = itemView.findViewById(R.id.textStatus);
             textPage = itemView.findViewById(R.id.textPage);
-            ratingBar = itemView.findViewById(R.id.ratingBar); // Remplace textRating
+            ratingBar = itemView.findViewById(R.id.ratingBar);
+            clickZone = itemView.findViewById(R.id.clickZone);
         }
     }
 
@@ -138,7 +142,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Book book = bookList.get(position);
         holder.textTitle.setText(book.getTitle());
         holder.textAuthorYear.setText(book.getAuthor() + " - " + book.getPublicationYear());
-        holder.ratingBar.setRating(book.getRating()); // Utilise le RatingBar
+        holder.ratingBar.setRating(book.getRating());
+        holder.clickZone.setOnLongClickListener(v -> {
+            Intent intent = new Intent(context, AddBookWindow.class);
+            intent.putExtra("BOOK", book);
+            intent.putExtra("UPDATE", true);
+            context.startActivity(intent);
+            return true;
+        });
 
         if (book.isRead()) {
             holder.textStatus.setText(context.getString(R.string.read));

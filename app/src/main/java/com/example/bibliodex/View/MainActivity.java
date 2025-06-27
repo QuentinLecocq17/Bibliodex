@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void displayAddBookWindow(View view) {
         Intent intent = new Intent(this, AddBookWindow.class);
+        intent.putExtra("BOOK", bookVM.getBook());
         startActivity(intent);
     }
 

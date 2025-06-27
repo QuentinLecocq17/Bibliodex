@@ -18,8 +18,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.bibliodex.Model.Book;
 import com.example.bibliodex.R;
 import com.example.bibliodex.ViewModel.BookVM;
+
+import java.util.ArrayList;
 
 public class AddBookWindow extends AppCompatActivity {
 
@@ -37,6 +40,7 @@ public class AddBookWindow extends AppCompatActivity {
     private ActivityResultLauncher<Intent> pickImageLauncher;
     private BookVM bookVM;
     private String coverUri = null;
+    private boolean update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,9 @@ public class AddBookWindow extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        this.bookVM = new BookVM(this);
+        this.bookVM.setBook((Book) getIntent().getSerializableExtra("BOOK"));
+        this.update = getIntent().getBooleanExtra("UPDATE", false);
         this.checkRead = findViewById(R.id.checkRead);
         this.inputPage = findViewById(R.id.inputPage);
         this.btnCancel = findViewById(R.id.btnCancel);
@@ -59,7 +66,7 @@ public class AddBookWindow extends AppCompatActivity {
         this.btnValidate = findViewById(R.id.btnValidate);
         this.btnChangeCover = findViewById(R.id.btnChangeCover);
         this.coverImage = findViewById(R.id.coverPreview);
-        this.coverImage.setImageResource(R.drawable.default_book);
+        if(this.update) {this.InitForm();};
 
         checkRead.setOnCheckedChangeListener((buttonView, isChecked) -> {
             inputPage.setVisibility(isChecked ? View.GONE : View.VISIBLE);
@@ -81,12 +88,27 @@ public class AddBookWindow extends AppCompatActivity {
         btnValidate.setOnClickListener(this::validateAddBook);
     }
 
+    private void InitForm() {
+        inputTitle.setText(bookVM.getTitle());
+        inputAuthor.setText(bookVM.getAuthor());
+        inputYear.setText(String.valueOf(bookVM.getPublicationYear()));
+        ratingBar.setRating(bookVM.getRating());
+        checkFav.setChecked(bookVM.isFavorite());
+        checkRead.setChecked(bookVM.isRead());
+        inputPage.setText(String.valueOf(bookVM.getPageActual()));
+        coverUri = bookVM.getCoverUri();
+        if (coverUri != null && !coverUri.isEmpty()) {
+            coverImage.setImageURI(Uri.parse(coverUri));
+        } else {
+            coverImage.setImageResource(R.drawable.default_book);
+        }
+    }
+
     /**
      * Validates the input fields and adds a new book.
      * @param view the view that triggered this method
      */
     private void validateAddBook(View view) {
-        BookVM bookVM = new BookVM(this);
         bookVM.setTitle(inputTitle.getText().toString());
         bookVM.setAuthor(inputAuthor.getText().toString());
         bookVM.setPublicationYear(Integer.parseInt(inputYear.getText().toString()));
@@ -95,7 +117,11 @@ public class AddBookWindow extends AppCompatActivity {
         bookVM.setRead(checkRead.isChecked());
         bookVM.setPageActual(checkRead.isChecked() ? 0 : Integer.parseInt(inputPage.getText().toString()));
         bookVM.setCoverUri(coverUri != null ? coverUri : "android.resource://com.example.bibliodex/drawable/default_book");
-        bookVM.addBook();
+        if (update) {
+            bookVM.updateBook();
+        } else {
+            bookVM.addBook();
+        }
         displayMainPage(view);
     }
 

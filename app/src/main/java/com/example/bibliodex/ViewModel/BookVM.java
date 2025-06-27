@@ -45,6 +45,12 @@ public class BookVM implements Serializable {
     }
 
     /**
+     * Gets the unique identifier of the book.
+     * @return
+     */
+    public String getId() {return book.getId();}
+
+    /**
      * Gets the title of the book.
      * @return the book title
      */
@@ -153,7 +159,7 @@ public class BookVM implements Serializable {
      * @param pageActual the page to set
      */
     public void setPageActual(int pageActual) {
-        book.setPageActual(pageActual);
+        book.setCurrentPage(pageActual);
     }
 
     /**
@@ -181,10 +187,9 @@ public class BookVM implements Serializable {
 
     /**
      * Updates the book in the Data Access Object.
-     * @param index the index of the book to update
      */
-    public void updateBook(int index) {
-        bookDAO.updateBook(index, book);
+    public void updateBook() {
+        bookDAO.updateBook(book);
     }
 
     /**
@@ -192,15 +197,6 @@ public class BookVM implements Serializable {
      */
     public void removeBook() {
         bookDAO.removeBook(book);
-    }
-
-    /**
-     * Gets the book at a specific index from the Data Access Object.
-     * @param index the index of the book
-     * @return the book at the specified index
-     */
-    public Book getBookAtIndex(int index) {
-        return bookDAO.getBook(index);
     }
 
     /**
