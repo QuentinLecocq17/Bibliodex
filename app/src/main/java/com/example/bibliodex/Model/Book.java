@@ -132,5 +132,6 @@ public class Book implements Serializable {
         this.isRead = false;
         this.isFavorite = false;
         this.pageActual = 0;
+        this.coverUri = "android.resource://com.example.bibliodex/drawable/default_book";
     }
 }

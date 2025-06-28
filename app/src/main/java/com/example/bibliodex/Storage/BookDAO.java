@@ -59,7 +59,15 @@ public class BookDAO extends BaseDAO {
      * @param book Book to remove
      */
     public void removeBook(Book book) {
-        listBooks.remove(book);
+        int i = 0;
+        boolean found = false;
+        while (!found){
+            if (Objects.equals(listBooks.get(i).getId(), book.getId())) {
+                listBooks.remove(i);
+                found = true;
+            }
+            i++;
+        }
         saveBooks();
     }
 

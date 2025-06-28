@@ -96,6 +96,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         }
     };
 
+    public Book getBookAtPosition(int position) {
+        return bookList.get(position);
+    }
+
+    public void removeBook(int position) {
+        bookList.remove(position);
+        notifyItemRemoved(position);
+    }
+
     /**
      * ViewHolder for displaying book information in the RecyclerView.
      * Holds references to the views for each data item.
@@ -143,13 +152,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.textTitle.setText(book.getTitle());
         holder.textAuthorYear.setText(book.getAuthor() + " - " + book.getPublicationYear());
         holder.ratingBar.setRating(book.getRating());
-        holder.clickZone.setOnLongClickListener(v -> {
-            Intent intent = new Intent(context, AddBookWindow.class);
-            intent.putExtra("BOOK", book);
-            intent.putExtra("UPDATE", true);
-            context.startActivity(intent);
-            return true;
-        });
 
         if (book.isRead()) {
             holder.textStatus.setText(context.getString(R.string.read));
@@ -167,6 +169,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         } else {
             holder.imageCover.setImageResource(R.drawable.default_book);
         }
+        holder.clickZone.setOnLongClickListener(v -> {
+            Intent intent = new Intent(context, AddBookWindow.class);
+            intent.putExtra("BOOK", book);
+            intent.putExtra("UPDATE", true);
+            context.startActivity(intent);
+            return true;
+        });
+
     }
 
     /**

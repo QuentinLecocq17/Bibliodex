@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import com.example.bibliodex.RecyclerViewManagment.BookAdapter;
 import com.example.bibliodex.Model.Book;
 import com.example.bibliodex.R;
 import com.example.bibliodex.RecyclerViewManagment.MarginItemDecoration;
+import com.example.bibliodex.RecyclerViewManagment.SwipeToDeleteCallback;
 import com.example.bibliodex.ViewModel.BookVM;
 
 import java.util.ArrayList;
@@ -54,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
         int marginInPx = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
         listCurrentBooks.addItemDecoration(new MarginItemDecoration(marginInPx));
+        listCurrentBooks.setLayoutManager(new LinearLayoutManager(this));
+
+        SwipeToDeleteCallback swipeHandler = new SwipeToDeleteCallback(this, bookAdapter);
+        new ItemTouchHelper(swipeHandler).attachToRecyclerView(listCurrentBooks);
     }
 
     /**

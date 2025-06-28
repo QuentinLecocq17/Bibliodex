@@ -22,6 +22,10 @@ import com.example.bibliodex.Model.Book;
 import com.example.bibliodex.R;
 import com.example.bibliodex.ViewModel.BookVM;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class AddBookWindow extends AppCompatActivity {
@@ -79,8 +83,7 @@ public class AddBookWindow extends AppCompatActivity {
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         Uri selectedImageUri = result.getData().getData();
-                        coverImage.setImageURI(selectedImageUri);
-                        coverUri = selectedImageUri.toString();
+                        handlePickedImage(selectedImageUri);
                     }
                 }
         );
@@ -101,6 +104,23 @@ public class AddBookWindow extends AppCompatActivity {
             coverImage.setImageURI(Uri.parse(coverUri));
         } else {
             coverImage.setImageResource(R.drawable.default_book);
+        }
+    }
+
+    private void handlePickedImage(Uri selectedImageUri) {
+        try (InputStream in = getContentResolver().openInputStream(selectedImageUri)) {
+            File file = new File(getFilesDir(), "cover_" + System.currentTimeMillis() + ".jpg");
+            try (OutputStream out = new FileOutputStream(file)) {
+                byte[] buffer = new byte[4096];
+                int len;
+                while ((len = in.read(buffer)) > 0) {
+                    out.write(buffer, 0, len);
+                }
+            }
+            coverUri = Uri.fromFile(file).toString();
+            coverImage.setImageURI(Uri.fromFile(file));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
