@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Data Access Object (DAO) for managing Book objects in persistent storage using SharedPreferences.
@@ -58,33 +59,32 @@ public class BookDAO extends BaseDAO {
      * @param book Book to remove
      */
     public void removeBook(Book book) {
-        listBooks.remove(book);
+        int i = 0;
+        boolean found = false;
+        while (!found){
+            if (Objects.equals(listBooks.get(i).getId(), book.getId())) {
+                listBooks.remove(i);
+                found = true;
+            }
+            i++;
+        }
         saveBooks();
     }
 
     /**
      * Updates a book at the specified index and saves the updated list to SharedPreferences.
-     * @param index Index of the book to update
-     * @param book New Book object to replace the old one
      */
-    public void updateBook(int index, Book book) {
-        if (index >= 0 && index < listBooks.size()) {
-            listBooks.set(index, book);
-            saveBooks();
+    public void updateBook(Book updatedBook) {
+        int i = 0;
+        boolean found = false;
+        while (!found){
+            if (Objects.equals(listBooks.get(i).getId(), updatedBook.getId())) {
+                listBooks.set(i, updatedBook);
+                found = true;
+            }
+            i++;
         }
-    }
-
-    /**
-     * Retrieves a book at the specified index.
-     * @param index Index of the book to retrieve
-     * @return Book object at the given index, or null if index is invalid
-     */
-    public Book getBook(int index) {
-        Book book = null;
-        if (index >= 0 && index < listBooks.size()) {
-            book = listBooks.get(index);
-        }
-        return book;
+        saveBooks();
     }
 
     /**

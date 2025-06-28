@@ -23,4 +23,7 @@
     <string name="displayProgress">Books in progress</string>
     <string name="searchBooks">Search Book</string>
     <string name="btnBack">Back</string>
+    <string name="deleteTitle">Are you sure to delete this book?</string>
+    <string name="yesLabel">Yes</string>
+    <string name="noLabel">No</string>
 </resources>

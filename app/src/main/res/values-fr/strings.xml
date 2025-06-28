@@ -24,4 +24,7 @@
     <string name="displayProgress">Livre en cours</string>
     <string name="searchBooks">Rechercher un livre</string>
     <string name="btnBack">Retour</string>
+    <string name="deleteTitle">Êtes-vous sûr de supprimer ce livre ?</string>
+    <string name="yesLabel">Oui</string>
+    <string name="noLabel">Non</string>
 </resources>
